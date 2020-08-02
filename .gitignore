@@ -133,3 +133,5 @@ s28/settings.py
 
 
 .idea
+static/img/
+static/js/

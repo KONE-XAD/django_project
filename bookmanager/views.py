@@ -140,6 +140,14 @@ def template_test(request):
     name = '谢安东'
     location = '中国'
     age = 14
+    my_list = ['xieandong', 'xad', 'xiead', 'adxie']
+    my_tuple = ('xieandong', 'xad', 'xiead', 'adxie')
+    my_set = {'xieandong', 'xad', 'xiead', 'adxie'}
+    my_dict = {
+        'name': 'xad',
+        'age': 23,
+        'work': 'developer',
+    }
 
     class Person:
         def __init__(self, name, age):
@@ -153,6 +161,10 @@ def template_test(request):
                   {
                       'name': name,
                       'location': location,
+                      'my_list': my_list,
+                      'my_tuple': my_tuple,
+                      'my_set': my_set,
+                      'my_dict': my_dict,
                       'person': Person(name, age),
                   }
                   )
