@@ -137,7 +137,7 @@ def author_change(request):
 
 
 def template_test(request):
-    name = '谢安东'
+    name = 'xieandog'
     location = '中国'
     age = 14
     my_list = ['xieandong', 'xad', 'xiead', 'adxie']
@@ -166,5 +166,6 @@ def template_test(request):
                       'my_set': my_set,
                       'my_dict': my_dict,
                       'person': Person(name, age),
+                      'a': '<a href="https://www.baiducom">百度一下</a>'
                   }
                   )
