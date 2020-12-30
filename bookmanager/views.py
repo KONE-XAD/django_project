@@ -30,6 +30,8 @@ def publisher_add(request):
 
 def publisher_del(request):
     pub_id = request.GET.get('id')
+
+    # 查询到的是对象列表，而不是单个对象
     ret = models.Publisher.objects.filter(id=pub_id)
     if ret:
         ret.delete()
@@ -58,16 +60,22 @@ def bookinfo_lists(request):
 
 
 def bookinfo_add(request):
+    error = ''
     all_publishers = models.Publisher.objects.all()
     if request.method == "POST":
         book_name = request.POST.get('book_name')
         pub_id = request.POST.get('pub_id')
-        if models.Bookinfo.objects.filter(book_name=book_name):
-            return render(request, 'bookinfo_add.html', {'all_publishers': all_publishers, 'error': "书籍已存在"})
+        if not book_name:
+            error = "书籍名称不能为空"
+        elif models.Bookinfo.objects.filter(book_name=book_name):
+            error = "书籍已存在"
+            # return render(request, 'bookinfo_add.html', {'all_publishers': all_publishers, 'error': "书籍已存在"})
         else:
             ret = models.Bookinfo.objects.create(book_name=book_name, publister_id_id=pub_id)
             return redirect('/bookinfo_lists/')
-    return render(request, 'bookinfo_add.html', {'all_publishers': all_publishers})
+
+    all_publishers = models.Publisher.objects.all()
+    return render(request, 'bookinfo_add.html', {'all_publishers': all_publishers, 'error': error})
 
 
 def bookinfo_del(request):
