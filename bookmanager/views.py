@@ -5,7 +5,7 @@ from bookmanager import models
 # Create your views here.
 
 def publisher_lists(request):
-    all_publishers = models.Publisher.objects.all()
+    all_publishers = models.Publisher.objects.all().order_by('id')
     # for i in l:
     #     print(i.id,i.name)
 
@@ -14,9 +14,11 @@ def publisher_lists(request):
 
 
 def publisher_add(request):
-    if request.method == 'POST' and request.POST.get('pub_name') != '':
+    if request.method == 'POST':
         pub_name = request.POST.get('pub_name')
-        if models.Publisher.objects.filter(name=pub_name):
+        if not pub_name:
+            return render(request, 'publisher_add.html', {'error': "出版社不能为空"})
+        elif models.Publisher.objects.filter(name=pub_name):
             return render(request, 'publisher_add.html', {'error': "出版社已存在"})
         else:
             ret = models.Publisher.objects.create(name=pub_name)
