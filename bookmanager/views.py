@@ -83,7 +83,7 @@ def bookinfo_del(request):
     ret = models.Bookinfo.objects.filter(id=book_id)
     if ret:
         ret.delete()
-        return redirect('/bookinfo_lists/')
+    return redirect('/bookinfo_lists/')
 
 
 def bookinfo_change(request):
@@ -128,8 +128,9 @@ def author_del(request):
     if request.method == "GET":
         author_id = request.GET.get("author_id")
         author_obj = models.Author.objects.get(id=author_id)
-        author_obj.delete()
-        return redirect('/author_lists/')
+        if author_obj:
+            author_obj.delete()
+    return redirect('/author_lists/')
 
 
 def author_change(request):

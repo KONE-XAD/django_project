@@ -21,21 +21,30 @@ from django.contrib import admin
 from bookmanager import views
 
 urlpatterns = [
+    # 管理后台
     url(r'^admin/', admin.site.urls),
     # url(r'index/', views.index),
     # url(r'login/', views.login),
     # url(r'db_query/', views.db_query),
+    url(r'^$', views.publisher_lists),
+    # 出版社操作
     url(r'^publisher_lists/', views.publisher_lists),
     url(r'^publisher_add/', views.publisher_add),
     url(r'^publisher_del/', views.publisher_del),
     url(r'^publisher_change/', views.publisher_change),
+
+    # 书籍管理
     url(r'^bookinfo_lists/', views.bookinfo_lists),
     url(r'^bookinfo_add/', views.bookinfo_add),
     url(r'^bookinfo_del/', views.bookinfo_del),
     url(r'^bookinfo_change/', views.bookinfo_change),
+
+    # 作者管理
     url(r'^author_lists/', views.author_lists),
     url(r'^author_add/', views.author_add),
     url(r'^author_del/', views.author_del),
     url(r'^author_change/', views.author_change),
+
+    # 测试页面
     url(r'^template_test/', views.template_test),
 ]
