@@ -1,58 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>出版社</title>
-    <link rel="stylesheet" href="../static_cname/plugins/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static_cname/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="../static_cname/css/dashboard.css">
+{% extends 'index_mb.html' %}
+{% block title %}
+    书籍
+{% endblock %}
 
-</head>
-<body>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
+{# 导入特殊css #}
+{% block css %}
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="/publisher_lists/">出版社 <span class="sr-only">(current)</span></a></li>
-                <li class=""><a href="/bookinfo_lists/">书籍 <span class="sr-only">(current)</span></a></li>
-                <li class=""><a href="/author_lists/">作者 <span class="sr-only">(current)</span></a></li>
-            </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h2 class="sub-header">Section title</h2>
+{% endblock %}
+
+{# 导入特殊js #}
+{% block js %}
+
+{% endblock %}
+
+{% block book_nav_class %}
+    class="active"
+{% endblock %}
+
+{% block main %}
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h2 class="sub-header">书籍</h2>
 
 
-            <form class="form-horizontal" method="post" action="">
-                <div class="form-group">
-                    <label for="" class="col-sm-2 control-label">书籍名称</label>
-                    <div class="col-sm-8">
-                        <input type="text" name="book_name" class="form-control" value="{{ book_obj.book_name }}">
+        <form class="form-horizontal" method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="" class="col-sm-2 control-label">书籍名称</label>
+                <div class="col-sm-8">
+                    <input type="text" name="book_name" class="form-control" value="{{ book_obj.book_name }}">
                         <span class="alert-info">{{ error }}</span>
                     </div>
                 </div>
@@ -78,7 +53,4 @@
             </form>
 
         </div>
-    </div>
-</div>
-</body>
-</html>
+{% endblock %}

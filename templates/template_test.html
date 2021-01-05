@@ -28,6 +28,24 @@
 {{ a }}
 <br>
 {{ a|safe }}
+<hr>
 
+{% load mytags %}
+{{ name|yourname:'dfdfd' }}
+<hr>
+
+{% for myname in my_list %}
+    <li>{{ forloop.revcounter }}-{{ myname }}</li>
+{% endfor %}
+
+<hr>
+{% for myname in my_list %}
+    <li>{{ forloop.first }}-{{ myname }}</li>
+{% endfor %}
+
+<hr>
+{% for myname in my_list %}
+    <li>{{ forloop.last }}-{{ myname }}</li>
+{% endfor %}
 </body>
 </html>

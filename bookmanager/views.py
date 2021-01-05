@@ -180,3 +180,7 @@ def template_test(request):
                       'a': '<a href="https://www.baiducom">百度一下</a>'
                   }
                   )
+
+
+def form(request):
+    return render(request, 'form.html')

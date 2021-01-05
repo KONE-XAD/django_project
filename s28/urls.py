@@ -47,4 +47,5 @@ urlpatterns = [
 
     # 测试页面
     url(r'^template_test/', views.template_test),
+    url(r'^form/', views.form),
 ]
