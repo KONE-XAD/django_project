@@ -17,7 +17,7 @@ def timer(func):
     return inner
 
 
-@timer
+# @timer
 def publisher_lists(request):
     all_publishers = models.Publisher.objects.all().order_by('id')
     # for i in l:
@@ -32,7 +32,21 @@ from django.utils.decorators import method_decorator
 
 
 class Publisher_add(View):
+    # 不修改源码的情况下，修改方法，避免全局影响，则使用装饰器单独拎出来修改
+    # 可以单独加在某个类方法上
+    # 可以加在dispatch方法上
+    # 也可以单独在这类上的某个方法加
+    # @method_decorator(timer,name='post')
+    # @method_decorator(timer,name='get')
+    # @method_decorator(timer,name='dispatch') 建议这种
+    # class Publish_add(View):
+
     @method_decorator(timer)
+    def dispatch(self, request, *args, **kwargs):
+        ret = super().dispatch(request, *args, **kwargs)
+        return ret
+
+    # @method_decorator(timer)
     def get(self, request):
         print("get")
         return render(request, 'publisher_add.html')
