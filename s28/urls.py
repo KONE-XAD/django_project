@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^$', views.publisher_lists),
     # 出版社操作
     url(r'^publisher_lists/', views.publisher_lists),
-    url(r'^publisher_add/', views.publisher_add),
+    url(r'^publisher_add/', views.Publisher_add.as_view()),
     url(r'^publisher_del/', views.publisher_del),
     url(r'^publisher_change/', views.publisher_change),
 
