@@ -28,9 +28,11 @@ def publisher_lists(request):
 
 
 from django.views import View
+from django.utils.decorators import method_decorator
 
 
 class Publisher_add(View):
+    @method_decorator(timer)
     def get(self, request):
         print("get")
         return render(request, 'publisher_add.html')
