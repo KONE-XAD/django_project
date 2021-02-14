@@ -1,9 +1,23 @@
 from django.shortcuts import render, HttpResponse, redirect
 from bookmanager import models
 
-
 # Create your views here.
 
+import time
+
+
+def timer(func):
+    def inner(*args, **kwargs):
+        start = time.time()
+        ret = func(*args, **kwargs)
+        end = time.time()
+        print("执行时间：{}".format(end - start))
+        return ret
+
+    return inner
+
+
+@timer
 def publisher_lists(request):
     all_publishers = models.Publisher.objects.all().order_by('id')
     # for i in l:
@@ -11,6 +25,27 @@ def publisher_lists(request):
 
     # return HttpResponse('hhhh')
     return render(request, 'publisher_lists.html', {'all_publishers': all_publishers})
+
+
+from django.views import View
+
+
+class Publisher_add(View):
+    def get(self, request):
+        print("get")
+        return render(request, 'publisher_add.html')
+
+    def post(self, request):
+        print("post")
+        pub_name = request.POST.get('pub_name')
+        if not pub_name:
+            return render(request, 'publisher_add.html', {'error': "出版社不能为空"})
+        elif models.Publisher.objects.filter(name=pub_name):
+            return render(request, 'publisher_add.html', {'error': "出版社已存在"})
+        else:
+            ret = models.Publisher.objects.create(name=pub_name)
+            print(ret, type(ret))
+            return redirect('/publisher_lists/')
 
 
 def publisher_add(request):
